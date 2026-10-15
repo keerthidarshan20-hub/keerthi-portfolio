@@ -1,0 +1,15 @@
+# Keerthi Mohan
+> Senior Frontend Engineer specializing in Next.js architecture, technical SEO, and AI crawlability. Based in Riyadh, Saudi Arabia.
+
+## Services
+- Frontend Web Architecture: React, Next.js, SSR, TypeScript
+- Technical SEO Audits & Core Web Vitals Optimization
+- AI Crawlability & Schema Integration
+
+## Results
+- Semrush AI Visibility Score 18 to 38; AI Search Health 42% to 84% at Contentstack
+- Lighthouse performance above 90 across key pages
+
+## Contact
+- https://your-domain.com
+- keerthidarshan20@gmail.com
