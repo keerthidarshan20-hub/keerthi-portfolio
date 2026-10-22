@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
+  icons: { icon: "/favicon.ico" },
   title: `${profile.name} | Frontend Architecture, Technical SEO & AI Crawlability`,
   description: profile.intro,
   alternates: { canonical: "/" },
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>

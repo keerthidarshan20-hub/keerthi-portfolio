@@ -6,7 +6,7 @@ export const profile = {
     "10 years building React and Next.js platforms. At Contentstack I lifted the Semrush AI Visibility Score from 18 to 38 and AI Search Health from 42% to 84%, while keeping Lighthouse above 90.",
   email: "keerthidarshan20@gmail.com",
   linkedin: "https://linkedin.com/in/keerthi-mohan-uideveloper/",
-  github: "https://github.com/YOUR-USERNAME",
+  github: "https://github.com/keerthidarshan20-hub/keerthi-portfolio",
   location: "Riyadh, Saudi Arabia",
   siteUrl: "https://your-domain.com", // replace after deploy
 };
@@ -67,9 +67,9 @@ export const results = {
   ],
   // TODO: replace with the real Lighthouse scores from your deployed site
   gauges: [
-    { label: "Performance", value: 95 },
-    { label: "Accessibility", value: 95 },
-    { label: "Best Practices", value: 95 },
-    { label: "SEO", value: 95 },
+    { label: "Performance", value: 99 },
+    { label: "Accessibility", value: 99 },
+    { label: "Best Practices", value: 100 },
+    { label: "SEO", value: 100 },
   ],
 };
