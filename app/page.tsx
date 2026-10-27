@@ -45,7 +45,6 @@ const jsonLd = {
 
 export default async function Home() {
   const data = await getPortfolio();
-  console.log("Portfolio data:", data);
 
   if (!data) {
     return <main>Portfolio content not found.</main>

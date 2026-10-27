@@ -8,7 +8,7 @@ export const profile = {
   linkedin: "https://linkedin.com/in/keerthi-mohan-uideveloper/",
   github: "https://github.com/keerthidarshan20-hub/keerthi-portfolio",
   location: "Riyadh, Saudi Arabia",
-  siteUrl: "https://your-domain.com", // replace after deploy
+  siteUrl: "https://keerthi-portfolio-chi.vercel.app", // replace after deploy
 };
 
 export const services = [

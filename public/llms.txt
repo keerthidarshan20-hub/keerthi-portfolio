@@ -11,5 +11,5 @@
 - Lighthouse performance above 90 across key pages
 
 ## Contact
-- https://your-domain.com
+- https://keerthi-portfolio-chi.vercel.app
 - keerthidarshan20@gmail.com
