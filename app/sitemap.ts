@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
-import { profile } from "@/data/content";
+import { getPortfolio } from "@/sanity/lib/portfolio";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: profile.siteUrl, lastModified: new Date(), priority: 1 }];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const data = await getPortfolio();
+  return data?.profile?.siteUrl
+    ? [{ url: data.profile.siteUrl, lastModified: new Date(), priority: 1 }]
+    : [];
 }

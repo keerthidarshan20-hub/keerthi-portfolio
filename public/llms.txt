@@ -1,15 +1,41 @@
-# Keerthi Mohan
-> Senior Frontend Engineer specializing in Next.js architecture, technical SEO, and AI crawlability. Based in Riyadh, Saudi Arabia.
+# Keerthi Mohan - Portfolio
+> Senior Frontend Engineer building fast Next.js platforms that rank in search and are easy for AI systems to understand.
+
+## About
+
+Keerthi Mohan is a Senior Frontend Engineer based in Riyadh, Saudi Arabia, with 10 years of experience building React and Next.js platforms. He specializes in frontend architecture, technical SEO, Core Web Vitals, structured data, and AI crawlability.
+
+## Website
+- [Portfolio](https://keerthi-portfolio-chi.vercel.app)
+- [Resume](https://keerthi-portfolio-chi.vercel.app/Keerthi-Mohan-Resume.pdf)
+
+## Links
+- [Portfolio homepage](https://keerthi-portfolio-chi.vercel.app): Main portfolio and professional overview
+- [Resume](https://keerthi-portfolio-chi.vercel.app/Keerthi-Mohan-Resume.pdf): Downloadable PDF resume
+- [LinkedIn profile](https://linkedin.com/in/keerthi-mohan-uideveloper/): Professional profile
+- [GitHub repository](https://github.com/keerthidarshan20-hub/keerthi-portfolio): Portfolio source repository
 
 ## Services
-- Frontend Web Architecture: React, Next.js, SSR, TypeScript
-- Technical SEO Audits & Core Web Vitals Optimization
-- AI Crawlability & Schema Integration
+- Frontend Web Architecture: React, Next.js, server-side rendering, TypeScript, reusable component systems, and headless CMS integration
+- Technical SEO Audits and Core Web Vitals Optimization: metadata, accessibility, rendering, performance budgets, Lighthouse, PageSpeed, Semrush, and analytics
+- AI Crawlability and Schema Integration: JSON-LD, Schema.org, robots.txt, llms.txt, server-rendered HTML, and crawler-friendly content
 
 ## Results
-- Semrush AI Visibility Score 18 to 38; AI Search Health 42% to 84% at Contentstack
-- Lighthouse performance above 90 across key pages
+- Increased Contentstack's Semrush AI Visibility Score from 18 to 38
+- Increased Contentstack's AI Search Health score from 42% to 84%
+- Maintained Lighthouse performance above 90 across key pages
+
+## Experience
+- Senior Software Engineer 2, Contentstack, 2022–Present
+- Senior Software Engineer, Y Media Labs, 2018–2022
+- Associate Technology, Publicis Sapient, 2016–2018
+
+## Skills
+- React.js, Next.js, TypeScript, Tailwind, SCSS, Redux
+- Technical SEO, Semrush, Lighthouse, Core Web Vitals, Schema.org
+- Contentstack, Contentful, Playwright, Jest, Google Analytics, Google Tag Manager
 
 ## Contact
-- https://keerthi-portfolio-chi.vercel.app
-- keerthidarshan20@gmail.com
+- Email: [keerthidarshan20@gmail.com](mailto:keerthidarshan20@gmail.com)
+- LinkedIn: [Keerthi Mohan](https://linkedin.com/in/keerthi-mohan-uideveloper/)
+- GitHub: [keerthidarshan20-hub](https://github.com/keerthidarshan20-hub/keerthi-portfolio)

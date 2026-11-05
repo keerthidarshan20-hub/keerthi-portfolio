@@ -12,7 +12,8 @@ export async function getPortfolio() {
       services,
       experience,
       skills,
-      results
+      results,
+      content
     }
   `)
 }

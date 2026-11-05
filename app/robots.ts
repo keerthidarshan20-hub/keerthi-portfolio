@@ -1,13 +1,14 @@
 import type { MetadataRoute } from "next";
-import { profile } from "@/data/content";
+import { getPortfolio } from "@/sanity/lib/portfolio";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const data = await getPortfolio();
   const bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot", "Google-Extended"];
   return {
     rules: [
       { userAgent: "*", allow: "/" },
       ...bots.map((userAgent) => ({ userAgent, allow: "/" })),
     ],
-    sitemap: `${profile.siteUrl}/sitemap.xml`,
+    ...(data?.profile?.siteUrl ? {sitemap: `${data.profile.siteUrl}/sitemap.xml`} : {}),
   };
 }

@@ -9,14 +9,16 @@ type Props = {
   after: number;
   max?: number;
   unit?: string;
+  beforeLabel: string;
+  afterLabel: string;
 };
 
-export default function BeforeAfterBar({ label, before, after, max = 100, unit = "" }: Props) {
+export default function BeforeAfterBar({ label, before, after, max = 100, unit = "", beforeLabel, afterLabel }: Props) {
   const reduce = useReducedMotion();
 
   const rows = [
-    { name: "Before", value: before, color: "bg-slate-400 dark:bg-slate-600", delay: 0 },
-    { name: "After", value: after, color: "bg-indigo-600", delay: 0.25 },
+    { name: beforeLabel, value: before, color: "bg-slate-400 dark:bg-slate-600", delay: 0 },
+    { name: afterLabel, value: after, color: "bg-indigo-600", delay: 0.25 },
   ];
 
   return (

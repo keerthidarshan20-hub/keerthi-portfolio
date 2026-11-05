@@ -1,161 +1,80 @@
-import { profile, services, experience, skills } from "@/data/content";
 import ThemeToggle from "@/components/ThemeToggle";
 import ResultsSection from "@/components/ResultsSection";
 import Reveal from "@/components/motion/Reveal";
 import CurrentYear from "@/components/CurrentYear";
-import { getPortfolio } from '@/sanity/lib/portfolio'
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": `${profile.siteUrl}/#person`,
-      name: profile.name,
-      jobTitle: profile.title,
-      url: profile.siteUrl,
-      email: `mailto:${profile.email}`,
-      address: { "@type": "PostalAddress", addressLocality: "Riyadh", addressCountry: "SA" },
-      worksFor: { "@type": "Organization", name: "Contentstack" },
-      sameAs: [profile.linkedin, profile.github],
-      knowsAbout: ["Next.js", "React", "TypeScript", "Technical SEO", "Core Web Vitals", "AI crawlability", "Schema.org"],
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${profile.siteUrl}/#website`,
-      url: profile.siteUrl,
-      name: `${profile.name} Portfolio`,
-      publisher: { "@id": `${profile.siteUrl}/#person` },
-    },
-    {
-      "@type": "ProfessionalService",
-      name: `${profile.name} Frontend & SEO Consulting`,
-      provider: { "@id": `${profile.siteUrl}/#person` },
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Services",
-        itemListElement: services.map((s) => ({
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: s.title, description: s.description },
-        })),
-      },
-    },
-  ],
-};
+import { getPortfolio } from "@/sanity/lib/portfolio";
 
 export default async function Home() {
   const data = await getPortfolio();
-
-  if (!data) {
-    return <main>Portfolio content not found.</main>
-  }
+  if (!data || !data.content) return <main className="mx-auto max-w-5xl px-6 py-24">Portfolio content is unavailable. Please complete the Site Content fields in the Sanity document.</main>;
+  const content = data.content;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: data.profile.name,
+        jobTitle: data.profile.title,
+        url: data.profile.siteUrl,
+        email: `mailto:${data.profile.email}`,
+        address: { "@type": "PostalAddress", addressLocality: "Riyadh", addressCountry: "SA" },
+        sameAs: [data.profile.linkedin, data.profile.github],
+        knowsAbout: data.skills,
+      }) }} />
 
-      <header className="sticky top-0 z-10 border-b border-slate-200/60 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
-        <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 text-sm">
-          <span className="font-semibold">{data.profile.name}</span>
-          <div className="flex items-center gap-6">
-            <a href="#services" className="hover:text-indigo-600">Services</a>
-            <a href="#experience" className="hover:text-indigo-600">Experience</a>
-            <a href="#contact" className="hover:text-indigo-600">Contact</a>
-            <div className="flex items-center gap-6">
-              <ThemeToggle />
-            </div>
+      <a className="skip-link" href="#home">Skip to content</a>
+      <header className="site-header">
+        <nav className="nav-shell" aria-label="Main navigation">
+          <a className="wordmark" href="#home" aria-label={`${data.profile.name}, home`}>KM<span>.</span></a>
+          <div className="nav-links">
+            <a href="#work">{content.navigation.expertise}</a><a href="#experience">{content.navigation.experience}</a><a href="#contact">{content.navigation.contact}</a>
+            <ThemeToggle lightLabel={content.themeLightLabel} darkLabel={content.themeDarkLabel} />
           </div>
         </nav>
       </header>
 
-      <main className="mx-auto max-w-5xl px-6">
-        {/* Hero */}
-        <section className="py-24">
-          <p className="text-sm font-medium text-indigo-600 dark:text-sky-300">{data.profile.title} · {data.profile.location}</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
-            {data.profile.headline}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300">{profile.intro}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a href={data.profile.linkedin} className="rounded-lg bg-indigo-600 px-5 py-3 font-medium text-white hover:bg-indigo-700">
-              Linkedin
-            </a>
-            <a href="/Keerthi-Mohan-Resume.pdf" download className="rounded-lg border border-slate-300 px-5 py-3 font-medium hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">
-              Download resume (PDF)
-            </a>
+      <main id="home" className="page-shell">
+        <section className="hero pt-4" aria-labelledby="hero-title">
+          <div className="wordmark pb-6">Keerthi Mohan</div>
+          <div className="eyebrow"><span className="status-dot" aria-hidden="true" /> {data.profile.location} <span className="eyebrow-divider" aria-hidden="true">/</span> {content.availabilityText}</div>
+          <h1 id="hero-title">{data.profile.headline}</h1>
+          <p className="hero-copy">{data.profile.intro}</p>
+          <div className="hero-actions">
+            <a className="button-primary" href="#work">{content.hero.ctaLabel} <span aria-hidden="true">↘</span></a>
+            <a className="button-secondary" href="/Keerthi-Mohan-Resume.pdf" download>{content.hero.resumeLabel}</a>
+          </div>
+          <div className="hero-meta">{content.hero.meta.map((item: string) => <span key={item}>{item}</span>)}</div>
+        </section>
+
+        <section id="work" className="section-block">
+          <div className="section-heading"><p className="section-kicker">{content.sections.expertiseKicker}</p><h2>{content.sections.expertiseTitle}</h2><p className="section-intro">{content.sections.expertiseIntro}</p></div>
+          <div className="focus-grid">
+            {content.focusAreas.map((item: {number: string; title: string; detail: string}, i: number) => <Reveal key={item.number} delay={i * 0.08}><article className="focus-card"><span className="card-number">{item.number}</span><h3>{item.title}</h3><p>{item.detail}</p></article></Reveal>)}
           </div>
         </section>
 
-        {/* Results strip */}
-        {/* <section aria-label="Key results" className="grid gap-6 border-y border-slate-200 py-10 sm:grid-cols-3 dark:border-slate-800">
-          {[
-            ["18 → 38", "Semrush AI Visibility Score"],
-            ["42% → 84%", "AI Search Health Score"],
-            ["90+", "Lighthouse performance"],
-          ].map(([num, label]) => (
-            <div key={label}>
-              <p className="text-3xl font-bold">{num}</p>
-              <p className="text-sm text-slate-500">{label}</p>
-            </div>
-          ))}
-        </section> */}
-        <ResultsSection />
+        <section className="results-wrap" aria-labelledby="results-title">
+          <div className="section-heading compact"><p className="section-kicker">{content.sections.resultsKicker}</p><h2 id="results-title">{content.sections.resultsTitle}</h2></div>
+          <ResultsSection results={data.results} heading={content.sections.resultsHeading} description={content.sections.resultsDescription} lighthouseTitle={content.sections.lighthouseTitle} beforeLabel={content.beforeLabel} afterLabel={content.afterLabel} />
+        </section>
 
-        {/* Services */}
-        <section id="services" className="py-20">
-          <h2 className="text-3xl font-bold">Services</h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {data.services.map((s: any, i: number) => (
-              <Reveal key={s.title} delay={i * 0.1}>
-                <article className="h-full rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800">
-                  <h3 className="text-xl font-semibold">{s.title}</h3>
-                  <p className="mt-1 text-xs font-medium text-indigo-600">{s.stack}</p>
-                  <p className="mt-4 text-slate-600 dark:text-slate-300">{s.description}</p>
-                  <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600 dark:text-slate-300">
-                    {s.points.map((p: string) => <li key={p}>{p}</li>)}
-                  </ul>
-                </article>
-              </Reveal>
-            ))}
+        <section id="experience" className="section-block experience-section">
+          <div className="section-heading"><p className="section-kicker">{content.sections.experienceKicker}</p><h2>{content.sections.experienceTitle}</h2></div>
+          <div className="experience-list">
+            {data.experience.map((e: { role: string; company: string; period: string }, i: number) => <Reveal key={e.role + e.company} delay={i * 0.08}><div className="experience-row"><div><h3>{e.role}</h3><p>{e.company}</p></div><span>{e.period}</span></div></Reveal>)}
           </div>
+          <div className="skill-cloud" aria-label={content.sections.skillsLabel}>{data.skills.map((s: string) => <span key={s}>{s}</span>)}</div>
         </section>
 
-        {/* Experience + skills */}
-        <section id="experience" className="py-20">
-          <h2 className="text-3xl font-bold">Experience</h2>
-          <ul className="mt-8 divide-y divide-slate-200 dark:divide-slate-800">
-            {data.experience.map((e: { role: string; company: string; period: string }, i: number) => (
-              <li key={e.role + e.company} className="flex flex-col py-4 sm:flex-row sm:justify-between">
-                <span><strong>{e.role}</strong>, {e.company}</span>
-                <span className="text-slate-500">{e.period}</span>
-              </li>
-            ))}
-          </ul>
-          <ul className="mt-8 flex flex-wrap gap-2">
-            {data.skills.map((s: string) => (
-              <li key={s} className="rounded-full bg-slate-100 px-3 py-1 text-sm dark:bg-slate-800">{s}</li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Contact */}
-        <section id="contact" className="py-20">
-          <h2 className="text-3xl font-bold">Let&apos;s talk</h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-300">
-            Need a site audit, a Next.js build, or help getting cited by AI search?
-          </p>
-          <a href={`mailto:${data.profile.email}`} className="mt-6 inline-block rounded-lg bg-indigo-600 px-5 py-3 font-medium text-white hover:bg-indigo-700">
-            {data.profile.email}
-          </a>
+        <section id="contact" className="contact-panel">
+          <p className="section-kicker">{content.sections.contactKicker}</p><h2>{content.sections.contactTitle} <span className="accent-text">{content.sections.contactAccent}</span></h2><p>{content.sections.contactDescription}</p>
+          <a className="button-primary" href={`mailto:${data.profile.email}`}>{content.sections.contactCta} ↗</a>
+          <div className="contact-links"><a href={data.profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={data.profile.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 py-8 text-center text-sm text-slate-500 dark:border-slate-800">
-        © <CurrentYear /> {data.profile.name}
-      </footer>
+      <footer className="site-footer"><span>{data.profile.name} <span className="accent-text">©</span> <CurrentYear /></span><span>{content.sections.footerTagline}</span></footer>
     </>
   );
 }
